@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - VVE_Pizza</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/VVE_Pizza.styles.css" asp-append-version="true" />
+    @await RenderSectionAsync("RegStyle", required: false)
+    @await RenderSectionAsync("LoginStyle", required: false)
+    @await RenderSectionAsync("PizzaListStyle", required: false)
+    @await RenderSectionAsync("SinglePizzaStyle", required: false)
+    @await RenderSectionAsync("OrderStyle", required: false)
+    @await RenderSectionAsync("HistoryStyle", required: false)
+</head>
+<body>   
+    <nav class="navbar">
+        <div class="container-nav">
+            <a asp-controller="Home" asp-action="Index" class="navbar-brand">VVE.PIZZA</a>
+
+            <div class="navbar-wrap">
+                <ul class="navbar-menu">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li><a asp-controller="History" asp-action="ShowHistory">История заказов</a></li>
+                    }
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li><a asp-controller="Admin" asp-action="AddPizza">Добавить пиццу</a></li>
+                    }
+                </ul>
+
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <p class="user-display">@User.Identity.Name</p>
+
+                    <form method="post" asp-controller="Account" asp-action="Logout">
+                        <input type="submit" value="Выход" class="log-out" />
+                    </form>
+                }
+                else
+                {
+                    <a asp-controller="Account" asp-action="Login" class="sign-in">Вход</a>
+                    <a asp-controller="Account" asp-action="Register" class="sign-up">Регистрация</a>
+                }
+            </div>
+        </div>
+    </nav>
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

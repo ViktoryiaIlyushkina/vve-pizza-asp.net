@@ -1,0 +1,51 @@
+﻿@using VVE_Pizza.Enums;
+@model OrderViewModel
+
+
+    <form method="post" asp-controller="Order" asp-action="Confirm" class="container">
+    <div>
+
+        <h2>Заказ</h2>
+        <p><b>Пицца: </b>@Model.PizzaName</p>
+        <p><img style='width:350px; height:300px;' src="data:image/jpeg;base64,@(Convert.ToBase64String(ViewBag.PizzaPhoto))" /></p>
+
+        <div>
+            <input asp-for="PizzaId" hidden></input><br />
+            <input asp-for="PizzaName" hidden />
+            <input asp-for="Amount" hidden />
+        </div>
+        <p class="price"><b>Цена: </b>@Model.Amount BYN</p>
+        <div>
+            <label asp-for="DeliveryType"></label><br />
+            <input type="radio" asp-for="DeliveryType" value="@DeliveryType.Address" checked="checed" />Доставка<br />
+            <input type="radio" asp-for="DeliveryType" value="@DeliveryType.InRestaurant" checked="checed" />Самовывоз<br />
+        </div>
+        <div>
+            <label asp-for="Email"></label><br />
+            <input asp-for="Email" />
+            <span asp-validation-for="Email"></span>
+        </div>
+        <div>
+            <label asp-for="Address"></label><br />
+            <input asp-for="Address" />
+            <span asp-validation-for="Address"></span>
+        </div>
+        <div>
+            <label asp-for="Phone"></label><br />
+            <input asp-for="Phone" />
+            <span asp-validation-for="Phone"></span>
+        </div>
+        <div>
+            <button class="btn" type="submit">Заказать</button>
+        </div>
+    </div>
+    </form>
+
+
+
+
+
+@section OrderStyle
+    {
+    <link rel="stylesheet" href="~/css/order.css" asp-append-version="true" />
+}

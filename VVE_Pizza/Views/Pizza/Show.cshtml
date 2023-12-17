@@ -1,0 +1,20 @@
+﻿@model PizzaViewModel
+
+<div class="container-pizza">
+
+    <h2>Пицца @Model.Name</h2>
+    <p><b>Описание: </b>@Model.Description</p>
+    <p><b>Размер: </b>@Model.Size</p>
+    <p><img style='width:350px; height:300px;' src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.Photo))" /></p>
+    <p class="price"><b>Цена: </b>@Model.Price BYN</p>
+    <div>
+        <button class="btn-order"><a class="order-btn" asp-area="" asp-controller="Order" asp-action="Confirm" asp-route-pizzaId="@Model.Id">Заказать</a></button>
+    </div>
+</div>
+
+
+
+@section SinglePizzaStyle
+    {
+    <link rel="stylesheet" href="~/css/pizzaSingle.css" asp-append-version="true" />
+}

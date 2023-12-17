@@ -1,0 +1,41 @@
+﻿@using VVE_Pizza.Enums;
+@model PizzaAddViewModel
+
+<form method="post" asp-controller="Admin" asp-action="AddPizza" class="container" enctype="multipart/form-data">
+    <h1>Добавить пиццу</h1>
+    <hr>
+    <div asp-validation-summary="ModelOnly"></div>
+    <div>
+        <label asp-for="Name"></label><br />
+        <input asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+    <div>
+        <label asp-for="Description"></label><br />
+        <input asp-for="Description" />
+        <span asp-validation-for="Description"></span>
+    </div>
+    <div>
+        <label asp-for="Size"></label><br />
+        <input type="radio" asp-for="Size" value="@SizeType.Small" checked="checed" />Маленькая<br />
+        <input type="radio" asp-for="Size" value="@SizeType.Medium" checked="checed" />Средняя<br />
+        <input type="radio" asp-for="Size" value="@SizeType.Big" checked="checed" />Большая<br />
+    </div>
+    <div>
+        <input name="Photo" type="file" id="pizza-image--id" class="form-control" />
+    </div>
+    <div>
+        <label asp-for="Price"></label><br />
+        <input asp-for="Price" />
+        <span asp-validation-for="Price"></span>
+    </div>
+    <div>
+        <button type="submit">Добавить</button>
+        <a asp-controller="Home" asp-action="Index" class="btn">Назад</a>
+    </div>
+</form>
+
+@section LoginStyle
+    {
+    <link rel="stylesheet" href="~/css/addPizza.css" asp-append-version="true" />
+}

@@ -1,0 +1,57 @@
+﻿@using VVE_Pizza.Enums;
+@model List<History>
+
+@if (Model.Any())
+{
+
+    {
+        <div class="history-container">
+        <table class="table">
+            <tr>
+                <th>Дата и время заказа</th>
+                <th>Пользователь</th>
+                <th>Пицца</th>
+                <th>Фото</th>
+                <th>Доставка</th>
+                <th>Email</th>
+                <th>Адрес</th>
+                <th>Телефон</th>
+                <th>Стоимость</th>
+            </tr>
+
+            @foreach (var order in Model)
+            {
+                <tr>
+                    <td>@order.OrderTime</td>
+                    <td>@order.UserName</td>
+                    <td>@order.PizzaName</td>
+                    <td><img style='width:100px; height:100px;' src="data:image/jpeg;base64,@(Convert.ToBase64String(order.Photo))" /></td>
+                    @if (order.DeliveryType == DeliveryType.InRestaurant)
+                    {
+                        <td>Самовывоз</td>
+                    }
+                    else
+                    {
+                        <td>Доставка</td>
+                    }
+                    <td>@order.Email</td>
+                    <td>@order.Address</td>
+                    <td>@order.Phone</td>
+                    <td>@order.Amount BYN</td>
+                </tr>
+            }
+
+        </table>
+        </div>
+    } 
+}
+else
+{
+    <p>Пусто</p>
+}
+
+@section HistoryStyle
+    {
+    <link rel="stylesheet" href="~/css/history.css" asp-append-version="true" />
+}
+
